@@ -1,0 +1,34 @@
+{
+  "name": "rl-mafia-bot",
+  "version": "1.0.0",
+  "description": "Discord bot to facilitate Rocket League Mafia",
+  "repository": "https://github.com/derek-rogers/rl-mafia-bot",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "cd src && node ./index.js",
+    "lint": "eslint ./src/index.js",
+    "test": "jest"
+  },
+  "author": "Derek Rogers",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/opus": "^0.1.0",
+    "bufferutil": "^4.0.1",
+    "discord.js": "^12.1.1",
+    "erlpack": "github:discordapp/erlpack",
+    "ffmpeg-static": "^2.7.0",
+    "libsodium-wrappers": "^0.7.6",
+    "opusscript": "0.0.6",
+    "sodium": "^3.0.2",
+    "utf-8-validate": "^5.0.2",
+    "zlib-sync": "^0.1.6"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.8.2",
+    "jest": "^25.3.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
