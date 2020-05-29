@@ -29,6 +29,7 @@
     "jest": "^25.3.0"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "rootDir": ".."
   }
 }

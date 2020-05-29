@@ -1,5 +1,6 @@
 const join = require('../src/commands/join')
-jest.mock('../src/model/gameState')
+const { loadGameState } = require('../src/model/gameState')
+// jest.mock('../src/model/gameState')
 
 const mockMessage1 = {
 	channel:  {
@@ -24,30 +25,30 @@ const mockMessage2 = {
 }
 
 test('add new player', () => {
-	const gameState = require('../src/model/gameState')
-	gameState.game.players = []
-	gameState.game.round = 0
-	gameState.game.started = false
+	let game = loadGameState()
+	game.players = []
+	game.round = 0
+	game.started = false
 
-	expect(gameState.game.players.length).toBe(0)
-	join.execute(mockMessage1, [])
-	expect(gameState.game.players.length).toBe(1)
-	expect(gameState.game.players[0].author).toBe(mockMessage1.author)
-	expect(gameState.game.players[0].score).toBe(0)
-	expect(gameState.game.players[0].mafiaCount).toBe(0)
-	expect(gameState.game.players[0].votesFor).toBe(0)
-	expect(gameState.game.players[0].votedFor).toBe(null)
+	expect(game.players.length).toBe(0)
+	game = join.execute(mockMessage1, [])
+	expect(game.players.length).toBe(1)
+	expect(game.players[0].author).toBe(mockMessage1.author)
+	expect(game.players[0].score).toBe(0)
+	expect(game.players[0].mafiaCount).toBe(0)
+	expect(game.players[0].votesFor).toBe(0)
+	expect(game.players[0].votedFor).toBe(null)
 })
 
 test('add 2 players', () => {
-	const gameState = require('../src/model/gameState')
-	gameState.game.players = []
-	gameState.game.round = 0
-	gameState.game.started = false
+	const game = loadGameState()
+	game.players = []
+	game.round = 0
+	game.started = false
 
-	expect(gameState.game.players.length).toBe(0)
+	expect(game.players.length).toBe(0)
 	join.execute(mockMessage1, [])
 	join.execute(mockMessage2, [])
 
-	expect(gameState.game.players.length).toBe(2)
+	expect(game.players.length).toBe(2)
 })

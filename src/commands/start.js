@@ -1,7 +1,7 @@
-const { game } = require('../model/gameState')
 const Discord = require('discord.js')
 const { prefix } = require('../../config.json')
 const methods = require('../methods')
+const { loadGameState, saveGameState } = require('../model/gameState')
 
 module.exports = {
 	name: 'start',
@@ -10,6 +10,9 @@ module.exports = {
 		if(args && args.length > 0) {
 			return message.reply('The `start` command takes no arguments')
 		}
+
+		const game = loadGameState()
+
 		if(game.players.length === 0) {
 			const embed = new Discord.MessageEmbed()
 				.setTitle('No Players')
@@ -19,14 +22,14 @@ module.exports = {
 			return
 		}
 
-		if(game.players.length % 2 !== 0) {
-			const embed = new Discord.MessageEmbed()
-				.setTitle('Unbalanced Teams')
-				.setDescription(`There's an odd number of players in the game. Join the game with \`${prefix}join\``)
-				.setColor(0xffff00)
-			message.channel.send({ embed: embed })
-			return
-		}
+		// if(game.players.length % 2 !== 0) {
+		// 	const embed = new Discord.MessageEmbed()
+		// 		.setTitle('Unbalanced Teams')
+		// 		.setDescription(`There's an odd number of players in the game. Join the game with \`${prefix}join\``)
+		// 		.setColor(0xffff00)
+		// 	message.channel.send({ embed: embed })
+		// 	return
+		// }
 
 		if(game.started) {
 			const embed = new Discord.MessageEmbed()
@@ -37,14 +40,9 @@ module.exports = {
 			return
 		}
 		game.started = true
-
+		saveGameState(game)
 		methods.assignRoles()
 		methods.assignTeams()
-
-		const embed = new Discord.MessageEmbed()
-			.setTitle('Assignments Delivered')
-			.setDescription('Check your DMs for your Role and Team. GLHF!')
-			.setColor(0x00FF00)
-		message.channel.send({ embed: embed })
+		methods.sendAssignments(message.client, message.channel)
 	},
 }

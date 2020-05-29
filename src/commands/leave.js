@@ -1,4 +1,5 @@
-const { game } = require('../model/gameState')
+const { loadGameState, saveGameState } = require('../model/gameState')
+const { showPlayers } = require('../methods')
 
 module.exports = {
 	name: 'leave',
@@ -8,6 +9,8 @@ module.exports = {
 			return message.reply('The `leave` command takes no arguments')
 		}
 
+		const game = loadGameState()
+
 		if(game.started) {
 			message.channel.send('Sorry, <@!' + message.author.id + '>, the game\'s already started.')
 			return
@@ -16,5 +19,9 @@ module.exports = {
 		game.players = game.players.filter((player) => {
 			return player.author.id !== message.author.id
 		})
+
+		saveGameState(game)
+		showPlayers(message.channel)
+		return game
 	},
 }

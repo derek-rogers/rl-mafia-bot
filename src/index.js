@@ -5,6 +5,7 @@ const { game, teams } = require('./model/gameState')
 const methods = require('./methods')
 const Discord = require('Discord.js')
 const client = new Discord.Client()
+
 client.commands = new Discord.Collection()
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
@@ -81,7 +82,6 @@ const handle = (message) => {
 	}
 }
 const handleNext = () => {
-	console.dir(game)
 	const undecidedVoters = game.players.filter((player) => player.votedFor == null)
 	if (undecidedVoters.length > 0) {
 		methods.showVoters(channel)
@@ -296,7 +296,15 @@ client.on('ready', () => {
 })
 
 client.on('message', (message) => {
-	if(!message.content.startsWith(prefix) || message.author.bot) {
+	if(message.author.bot) {
+		return
+	}
+	if (message.guild === null) {
+		message.reply('No offense, but I don\'t want you in my DMs. Go back to the mafia channel')
+		return
+	}
+
+	if(!message.content.startsWith(prefix)) {
 		return
 	}
 
@@ -304,6 +312,7 @@ client.on('message', (message) => {
 	const commandName = args.shift().toLowerCase()
 
 	if(!client.commands.has(commandName)) {
+		message.reply(`\`${commandName}\` is not a supported command`)
 		return
 	}
 
@@ -311,6 +320,7 @@ client.on('message', (message) => {
 
 	try{
 		command.execute(message, args)
+		console.log(message.author.username + ': ' + message.content)
 	}
 	catch (error) {
 		console.error(error)

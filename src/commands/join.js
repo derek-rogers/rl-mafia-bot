@@ -1,5 +1,6 @@
-const { game } = require('../model/gameState')
 const methods = require('../methods.js')
+const { saveGameState, loadGameState } = require('../model/gameState')
+
 module.exports = {
 	name: 'join',
 	description: 'Join the current game',
@@ -8,6 +9,8 @@ module.exports = {
 		if(args && args.length > 0) {
 			return message.reply('The `join` command takes no arguments')
 		}
+
+		const game = loadGameState()
 
 		if(game.started) {
 			message.channel.send('Sorry, ' + methods.tag(message.author.id) + ', the game\'s already started.')
@@ -27,7 +30,8 @@ module.exports = {
 			votedFor: null,
 		})
 
-
+		saveGameState(game)
 		methods.showPlayers(message.channel)
+		return game
 	},
 }

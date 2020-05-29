@@ -1,0 +1,51 @@
+{
+    "game": {
+        "players": [
+            {
+                "author": {
+                    "id": "277151325861445632",
+                    "bot": false,
+                    "username": "DerBear",
+                    "discriminator": "3163",
+                    "avatar": "5f1d2d9d319a0fefdbe64e561bde0ef7",
+                    "lastMessageChannelID": "699349595888812034",
+                    "createdTimestamp": 1486148425308,
+                    "defaultAvatarURL": "https://cdn.discordapp.com/embed/avatars/3.png",
+                    "tag": "DerBear#3163",
+                    "avatarURL": "https://cdn.discordapp.com/avatars/277151325861445632/5f1d2d9d319a0fefdbe64e561bde0ef7.webp",
+                    "displayAvatarURL": "https://cdn.discordapp.com/avatars/277151325861445632/5f1d2d9d319a0fefdbe64e561bde0ef7.webp"
+                },
+                "score": 3,
+                "mafiaCount": 0,
+                "votesFor": 3,
+                "votedFor": null,
+                "role": "villager",
+                "team": "orange"
+            },
+            {
+                "author": {
+                    "id": "415718582211575809",
+                    "bot": false,
+                    "username": "rtrout6",
+                    "discriminator": "9569",
+                    "avatar": null,
+                    "lastMessageChannelID": "699349595888812034",
+                    "createdTimestamp": 1519185433677,
+                    "defaultAvatarURL": "https://cdn.discordapp.com/embed/avatars/4.png",
+                    "tag": "rtrout6#9569",
+                    "avatarURL": null,
+                    "displayAvatarURL": "https://cdn.discordapp.com/embed/avatars/4.png"
+                },
+                "score": -3,
+                "mafiaCount": 1,
+                "votesFor": 3,
+                "votedFor": null,
+                "role": "mafia",
+                "team": "blue"
+            }
+        ],
+        "round": 3,
+        "started": true,
+        "winner": null
+    }
+}
