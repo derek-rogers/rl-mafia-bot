@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const config = require('../../config.json')
+const { prefix } = require('../../config.json')
 
 const methods = require('../methods.js')
 const { saveGameState, loadGameState } = require('../model/gameState')
@@ -18,7 +18,7 @@ module.exports = {
 		if(!game.started) {
 			const embed = new Discord.MessageEmbed()
 				.setTitle('Game not started')
-				.setDescription(`Once everyone has joined, start a game with \`${config.prefix}start\``)
+				.setDescription(`Once everyone has joined, start a game with \`${prefix}start\``)
 				.setColor(0xFFFF00)
 			channel.send({ embed: embed })
 			return
@@ -33,7 +33,7 @@ module.exports = {
 		if (game.winner == null) {
 			const embed = new Discord.MessageEmbed()
 				.setTitle('Missing Round Winner')
-				.setDescription(`Report who won the last round with either \`${config.prefix}winner blue\` or \`${config.prefix}winner orange\``)
+				.setDescription(`Report who won the last round with either \`${prefix}winner blue\` or \`${prefix}winner orange\``)
 				.setColor(0xFFFF00)
 			channel.send({ embed: embed })
 			return

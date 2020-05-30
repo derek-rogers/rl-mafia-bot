@@ -22,14 +22,14 @@ module.exports = {
 			return
 		}
 
-		// if(game.players.length % 2 !== 0) {
-		// 	const embed = new Discord.MessageEmbed()
-		// 		.setTitle('Unbalanced Teams')
-		// 		.setDescription(`There's an odd number of players in the game. Join the game with \`${prefix}join\``)
-		// 		.setColor(0xffff00)
-		// 	message.channel.send({ embed: embed })
-		// 	return
-		// }
+		if(game.players.length % 2 !== 0) {
+			const embed = new Discord.MessageEmbed()
+				.setTitle('Unbalanced Teams')
+				.setDescription(`There's an odd number of players in the game. Join the game with \`${prefix}join\` or leave the game with \`${prefix}leave\``)
+				.setColor(0xffff00)
+			message.channel.send({ embed: embed })
+			return
+		}
 
 		if(game.started) {
 			const embed = new Discord.MessageEmbed()

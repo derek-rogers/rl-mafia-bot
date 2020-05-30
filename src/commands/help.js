@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const config = require('../../config.json')
+const { prefix } = require('../../config.json')
 
 module.exports = {
 	name: 'help',
@@ -15,7 +15,7 @@ module.exports = {
 			.setColor(0x00FF00)
 
 		message.client.commands.map((command) => {
-			embed.addField(`\`${config.prefix}${command.name}${command.arguments ? ' ' + command.arguments : ''}\``, command.description)
+			embed.addField(`\`${prefix}${command.name}${command.arguments ? ' ' + command.arguments : ''}\``, command.description)
 		})
 
 		message.channel.send({ embed: embed })

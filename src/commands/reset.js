@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const config = require('../../config.json')
+const { prefix } = require('../../config.json')
 
 const { saveGameState } = require('../model/gameState')
 
@@ -21,7 +21,7 @@ module.exports = {
 		})
 		const embed = new Discord.MessageEmbed()
 			.setTitle('Game has been reset')
-			.setDescription(`Join a new game with \`${config.prefix}join\``)
+			.setDescription(`Join a new game with \`${prefix}join\``)
 			.setColor(0x00ff00)
 		channel.send({ embed: embed })
 	},
