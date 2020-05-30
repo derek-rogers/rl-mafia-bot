@@ -33,8 +33,6 @@ client.on('message', (message) => {
 		return
 	}
 
-	console.dir(message.client)
-
 	const args = message.content.slice(prefix.length).split(/ +/)
 	const commandName = args.shift().toLowerCase()
 

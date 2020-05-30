@@ -1,3 +1,5 @@
 auth.json
 node_modules/*
 .vscode/*
+**/gameState.json
+**/sampleState.json

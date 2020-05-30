@@ -129,7 +129,6 @@ module.exports = {
 	sendAssignments: (client, channel) => {
 		const game = loadGameState()
 
-		console.log('Sending assignments...')
 		game.players.map((player) => {
 			const embed = new Discord.MessageEmbed()
 				.setTitle('TOP SECRET')
