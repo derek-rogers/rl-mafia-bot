@@ -3,7 +3,7 @@ const { saveGameState, loadGameState } = require('../model/gameState')
 
 module.exports = {
 	name: 'join',
-	description: 'Join the current game',
+	description: 'Join the game',
 	execute(message, args) {
 
 		if(args && args.length > 0) {

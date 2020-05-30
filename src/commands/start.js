@@ -5,7 +5,7 @@ const { loadGameState, saveGameState } = require('../model/gameState')
 
 module.exports = {
 	name: 'start',
-	description: 'Start the current game',
+	description: 'Start the game',
 	execute(message, args) {
 		if(args && args.length > 0) {
 			return message.reply('The `start` command takes no arguments')

@@ -15,12 +15,48 @@
                     "avatarURL": "https://cdn.discordapp.com/avatars/277151325861445632/5f1d2d9d319a0fefdbe64e561bde0ef7.webp",
                     "displayAvatarURL": "https://cdn.discordapp.com/avatars/277151325861445632/5f1d2d9d319a0fefdbe64e561bde0ef7.webp"
                 },
-                "score": 3,
+                "score": 0,
                 "mafiaCount": 0,
-                "votesFor": 3,
-                "votedFor": null,
-                "role": "villager",
-                "team": "orange"
+                "votesFor": 0,
+                "votedFor": null
+            },
+            {
+                "author": {
+                    "id": "436407060763246593",
+                    "bot": false,
+                    "username": "DaddyFreeman",
+                    "discriminator": "3187",
+                    "avatar": null,
+                    "lastMessageChannelID": "699349595888812034",
+                    "createdTimestamp": 1524117951337,
+                    "defaultAvatarURL": "https://cdn.discordapp.com/embed/avatars/2.png",
+                    "tag": "DaddyFreeman#3187",
+                    "avatarURL": null,
+                    "displayAvatarURL": "https://cdn.discordapp.com/embed/avatars/2.png"
+                },
+                "score": 0,
+                "mafiaCount": 0,
+                "votesFor": 0,
+                "votedFor": null
+            },
+            {
+                "author": {
+                    "id": "293277405328703489",
+                    "bot": false,
+                    "username": "Bodhi",
+                    "discriminator": "9850",
+                    "avatar": "88845e270b5ca260deb03afa0571d412",
+                    "lastMessageChannelID": "699349595888812034",
+                    "createdTimestamp": 1489993182261,
+                    "defaultAvatarURL": "https://cdn.discordapp.com/embed/avatars/0.png",
+                    "tag": "Bodhi#9850",
+                    "avatarURL": "https://cdn.discordapp.com/avatars/293277405328703489/88845e270b5ca260deb03afa0571d412.webp",
+                    "displayAvatarURL": "https://cdn.discordapp.com/avatars/293277405328703489/88845e270b5ca260deb03afa0571d412.webp"
+                },
+                "score": 0,
+                "mafiaCount": 0,
+                "votesFor": 0,
+                "votedFor": null
             },
             {
                 "author": {
@@ -36,16 +72,15 @@
                     "avatarURL": null,
                     "displayAvatarURL": "https://cdn.discordapp.com/embed/avatars/4.png"
                 },
-                "score": -3,
-                "mafiaCount": 1,
-                "votesFor": 3,
+                "score": 0,
+                "mafiaCount": 0,
+                "votesFor": 0,
                 "votedFor": null,
-                "role": "mafia",
-                "team": "blue"
+                "role": null,
+                "team": null
             }
         ],
-        "round": 3,
-        "started": true,
-        "winner": null
+        "round": 0,
+        "started": false
     }
 }

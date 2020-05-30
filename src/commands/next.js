@@ -15,6 +15,15 @@ module.exports = {
 		const channel = message.channel
 		const game = loadGameState()
 
+		if(!game.started) {
+			const embed = new Discord.MessageEmbed()
+				.setTitle('Game not started')
+				.setDescription(`Once everyone has joined, start a game with \`${config.prefix}start\``)
+				.setColor(0xFFFF00)
+			channel.send({ embed: embed })
+			return
+		}
+
 		const undecidedVoters = game.players.filter((player) => player.votedFor == null)
 		if (undecidedVoters.length > 0) {
 			methods.showVoters(channel)
@@ -34,10 +43,9 @@ module.exports = {
 		game.players.map(player => {
 			player.votedFor = null
 		})
-
+		saveGameState(game)
 		methods.assignRoles()
 		methods.assignTeams()
-		saveGameState(game)
 		methods.sendAssignments(message.client, message.channel)
 	},
 }

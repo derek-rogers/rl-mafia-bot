@@ -3,6 +3,7 @@ const { tag, showVoters, scoreRound } = require('../methods.js')
 module.exports = {
 	name: 'vote',
 	description: 'Vote for who you think is the mafia',
+	arguments: '@player',
 	execute(message, args) {
 
 		const game = loadGameState()

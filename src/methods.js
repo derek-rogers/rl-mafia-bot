@@ -7,33 +7,8 @@ const tag = (id) => {
 }
 
 const shuffle = (array) => {
-	let currentIndex = array.length
-	let temporaryValue, randomIndex
-	// While there remain elements to shuffle...
-	while (currentIndex !== 0) {
-		// Pick a remaining element...
-		randomIndex = Math.floor(Math.random() * currentIndex)
-		currentIndex -= 1
-		console.log('Random Index: ' + randomIndex)
-
-		// And swap it with the current element.
-		temporaryValue = array[currentIndex]
-		array[currentIndex] = array[randomIndex]
-		array[randomIndex] = temporaryValue
-	}
-
-	return array
-}
-
-const newShuffle = (array) => {
 	for (let i = array.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1)) // random index from 0 to i
-		console.log('Fisher-Yates pivot: ' + j);
-		// swap elements array[i] and array[j]
-		// we use "destructuring assignment" syntax to achieve that
-		// you'll find more details about that syntax in later chapters
-		// same can be written as:
-		// let t = array[i]; array[i] = array[j]; array[j] = t
+		const j = Math.floor(Math.random() * (i + 1));
 		[array[i], array[j]] = [array[j], array[i]]
 	}
 }
@@ -70,31 +45,22 @@ module.exports = {
 	},
 	assignRoles: () => {
 		const game = loadGameState()
-		// game.players = shuffle(game.players)
-		const mafiaIndex = Math.floor(Math.random() * (game.players.length))
-		console.log('mafiaIndex: ' + mafiaIndex)
+		shuffle(game.players)
 		game.winner = null
-		game.players.map((player, index) => {
+		game.players.map((player) => {
 			player.votesFor = 0
 			player.votedFor = null
-			if (index === mafiaIndex) {
-				player.role = 'mafia'
-				player.mafiaCount++
-			}
-			else {
-				player.role = 'villager'
-			}
+			player.role = 'villager'
 		})
+		game.players[0].role = 'mafia'
+		game.players[0].mafiaCount++
 		saveGameState(game)
 	},
 	assignTeams: () => {
 		const game = loadGameState()
-		console.log('\nBefore Shuffle:')
-		console.dir(game.players)
-		newShuffle(game.players)
-		console.log('After Shuffle:')
-		console.dir(game.players)
-		console.log('\n')
+
+		shuffle(game.players)
+
 		game.players.map((player, index) => {
 			player.team = teams[index % 2]
 		})
@@ -173,9 +139,19 @@ module.exports = {
 				.addField('Your Team', player.team.toUpperCase())
 			client.users.cache.get(player.author.id).send({ embed: embed })
 		})
+
+		let blueString = ''
+		let orangeString = ''
+
+		game.players.map((player) => {
+			blueString += player.team === 'blue' ? `${tag(player.author.id)} ` : ''
+			orangeString += player.team === 'orange' ? `${tag(player.author.id)} ` : ''
+		})
+
 		const embed = new Discord.MessageEmbed()
 			.setTitle('Assignments Delivered')
-			.setDescription('Check your DMs for your Role and Team. GLHF!')
+			.addField('Blue Team', blueString)
+			.addField('Orange Team', orangeString)
 			.setColor(0x00FF00)
 		channel.send({ embed: embed })
 	},
@@ -236,12 +212,19 @@ function showScore(channel) {
 function revealMafia(channel, game) {
 	wait(0)
 		.then(() => {
+			const unicodeArrow = '\u27a1'
+			let description = ''
+			game.players.map((player) => {
+				const votedFor = game.players.find((p) => p.author.id === player.votedFor)
+				description += `${tag(player.author.id)} ${unicodeArrow} ${tag(votedFor.author.id)}\n`
+			})
 			const embed = new Discord.MessageEmbed()
-				.setTitle('All Votes are In...')
+				.setTitle('All votes are in...')
 				.setColor(0x00ff00)
+				.setDescription(description)
 
 			channel.send({ embed: embed })
-			return wait(1000)
+			return wait(3000)
 		})
 		.then(() => {
 			const embed = new Discord.MessageEmbed()
@@ -249,19 +232,32 @@ function revealMafia(channel, game) {
 				.setColor(0x00ff00)
 
 			channel.send({ embed: embed })
-			return wait(1000)
+			return wait(3000)
 		})
 		.then(() => {
 			const mafia = game.players.filter((player) => {
 				return player.role === 'mafia'
 			})[0]
 
+			const correctVoters = game.players.filter((player) => {
+				return player.votedFor === mafia.author.id
+			})
+
+			let description = ''
+
+			correctVoters.map((player) => {
+				description += `${tag(player.author.id)} `
+			})
+
+			description = correctVoters.length === 0 ? 'Nobody!' : description
+
 			const embed = new Discord.MessageEmbed()
 				.setTitle(mafia.author.username)
 				.setColor(0x00ff00)
+				.addField('The mafia was caught by:', description)
 
 			channel.send({ embed: embed })
-			return wait(1000)
+			return wait(3000)
 		})
 		.then(() => {
 			showScore(channel)

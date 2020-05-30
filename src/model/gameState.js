@@ -19,7 +19,6 @@ module.exports = {
 				'players': [],
 				'round': 0,
 				'started': false,
-
 			}
 		}
 

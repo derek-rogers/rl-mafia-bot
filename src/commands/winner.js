@@ -10,6 +10,7 @@ const toUpperCamel = (string) => {
 module.exports = {
 	name: 'winner',
 	description: 'Report which team won the last match',
+	arguments: '[blue | orange]',
 	execute(message, args) {
 
 		if (args && args.length !== 1) {
@@ -26,16 +27,14 @@ module.exports = {
 		const game = loadGameState()
 
 		if (!game.started) {
-			message.channel.reply('You have to start a game before reporting a winner!')
+			message.reply('You have to start a game before reporting a winner')
 			return
 		}
 
-
 		game.winner = teams.find((team) => team === winner)
 		const embed = new Discord.MessageEmbed()
-			.setTitle(toUpperCamel(winner) + ' wins!')
+			.setTitle(toUpperCamel(winner) + ' wins')
 			.setColor(winner == 'orange' ? 0xff6600 : 0x3333ff)
-
 
 		message.channel.send({ embed: embed })
 
